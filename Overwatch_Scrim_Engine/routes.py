@@ -11,7 +11,7 @@ def hello():
 def testSearch():
     my_sample_form = forms.SampleForm(request.form)
 
-    overbuff_url = "https://www.overbuff.com/players/pc/"
+    player_profile_url = "https://playoverwatch.com/en-us/career/pc/"
     players_list = ["Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666"]
 
     # if request.method == "POST":
@@ -26,4 +26,4 @@ def testSearch():
 
     #     return render_template('testResults.html', response=response, form=my_sample_form, major=major)
 
-    return render_template('playerSelect.html', overbuff_url=overbuff_url, players=players_list)
+    return render_template('playerSelect.html', player_profile_url=player_profile_url, players=players_list)
