@@ -29,6 +29,7 @@
   <ItemGroup>
     <Compile Include="app.py" />
     <Compile Include="Overwatch_Scrim_Engine\forms.py" />
+    <Compile Include="Overwatch_Scrim_Engine\player_handler.py" />
     <Compile Include="Overwatch_Scrim_Engine\routes.py" />
     <Compile Include="Overwatch_Scrim_Engine\__init__.py" />
   </ItemGroup>
