@@ -11,6 +11,11 @@ PLAYER_SPREADSHEET = '1iUS8gWn3RaZbiyUWkToArjh4x0a_owWgRmvERtict9M'
 # Start the range at A2 so that we remove the first line with the ident field.  Range is Line 2+, A-E
 SHEET_RANGE_NAME =  'Form Responses 1!A2:E' 
 
+# ############### TODO ###############
+# Add check for credentials.json file that allows user to upload the required API file
+# This would be a good thing to do in browser for usability.
+# Currently, if the credentials.json file is not found in the root the system will error.
+
 def getPlayers():
     creds = None
     
