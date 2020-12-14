@@ -5,7 +5,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-API_URL = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+
+SCOPE = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 PLAYER_SPREADSHEET = '1iUS8gWn3RaZbiyUWkToArjh4x0a_owWgRmvERtict9M'
 # Start the range at A2 so that we remove the first line with the ident field.  Range is Line 2+, A-E
@@ -27,7 +28,7 @@ def getPlayers():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', API_URL)
+                'credentials.json', SCOPE, redirect_uri="https://scrimengine.ddns.net/teamSelect")
             creds = flow.run_local_server(port=0) # Launch browser on bad pickel?
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
