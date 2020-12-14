@@ -22,8 +22,17 @@ def hello():
 
 @app.route("/teamSelect", methods=['GET', 'POST'])
 def teamSelect():
-    if not os.path.exists('token.pickle'):
-        return redirect("/authPage")
+    creds = None
+
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    else:
+        return redirect(url_for("authPage"))
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+
 
     my_sample_form = forms.SampleForm(request.form)
 
@@ -73,8 +82,8 @@ def oauth2callback():
     flow.fetch_token(authorization_response=authorization_response)
 
     creds = flow.credentials
+
     # Save the credentials for the next run
     with open('token.pickle', 'wb') as token:
         pickle.dump(creds, token)
-
     return redirect(url_for('teamSelect'))

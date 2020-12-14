@@ -27,19 +27,13 @@ def getPlayers():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPE, redirect_uri="https://scrimengine.ddns.net/teamSelect")
-            creds = flow.run_local_server(port=0) # Launch browser on bad pickel?
-        # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
+            print("ERROR!")
 
     service = build('sheets', 'v4', credentials=creds)
 
     # Load the sheets API
     sheet = service.spreadsheets()
-    player_spreadsheet = sheet.values().get(spreadsheetId=PLAYER_SPREADSHEET,
-                                range=SHEET_RANGE_NAME, ).execute()
+    player_spreadsheet = sheet.values().get(spreadsheetId=PLAYER_SPREADSHEET, range=SHEET_RANGE_NAME, ).execute()
     player_data = player_spreadsheet.get('values', [])
 
     if not player_data:
