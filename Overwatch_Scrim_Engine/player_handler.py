@@ -8,7 +8,8 @@ from google.auth.transport.requests import Request
 API_URL = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 PLAYER_SPREADSHEET = '1iUS8gWn3RaZbiyUWkToArjh4x0a_owWgRmvERtict9M'
-SHEET_RANGE_NAME =  'Form Responses 1!A1:E'
+# Start the range at A2 so that we remove the first line with the ident field.  Range is Line 2+, A-E
+SHEET_RANGE_NAME =  'Form Responses 1!A2:E' 
 
 def getPlayers():
     creds = None
@@ -22,7 +23,7 @@ def getPlayers():
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', API_URL)
-            creds = flow.run_local_server(port=0)
+            creds = flow.run_local_server(port=0) # Launch browser on bad pickel?
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
@@ -35,7 +36,31 @@ def getPlayers():
                                 range=SHEET_RANGE_NAME, ).execute()
     player_data = player_spreadsheet.get('values', [])
 
-    if not values:
+    if not player_data:
         print("No player data in sheet.")
         return None
-    return values
+    return player_data
+
+# This function is to return a list of palyer battle.net names.
+def extractBattleNet(playerDict):
+    battleNetIDs = []
+    for battleNet in playerDict:
+        battleNetIDs.append(battleNet[1])
+    return battleNetIDs
+
+# This function is to return a list of palyer Discord names.
+def extractDiscord(playerDict):
+    discordIDs = []
+    for discordID in playerDict:
+        discordIDs.append(discordID)
+    return discordIDs
+
+# Returns a battle.net or Discord ID formatted using '-' instead of '#' for URL compatibility reasons.
+def formatForWeb(battleNet):
+    return battleNet.replace("#", "-")
+
+def formatAllForWeb(playerDict):
+    formatted = []
+    for ID in playerDict:
+        formatted.append(formatForWeb(ID))
+    return formatted

@@ -1,5 +1,5 @@
 from flask import request, render_template
-from Overwatch_Scrim_Engine import app, forms
+from Overwatch_Scrim_Engine import app, forms, player_handler
 
 @app.route('/')
 def hello():
@@ -12,7 +12,10 @@ def testSearch():
     my_sample_form = forms.SampleForm(request.form)
 
     player_profile_url = "https://playoverwatch.com/en-us/career/pc/"
+
     players_list = ["Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666"]
+
+    players_list = player_handler.formatAllForWeb(player_handler.extractBattleNet(player_handler.getPlayers()))
 
     # if request.method == "POST":
     #     first_name = request.form["first_name"]

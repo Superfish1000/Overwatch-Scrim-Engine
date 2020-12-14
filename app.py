@@ -1,5 +1,6 @@
 from Overwatch_Scrim_Engine import app
 
+
 if __name__ == '__main__':
     import os
     HOST = os.environ.get('SERVER_HOST', 'localhost')
