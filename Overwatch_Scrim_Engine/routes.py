@@ -5,6 +5,7 @@ import pickle, os
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
+from google.auth.transport.requests import Request
 
 # Used to force client to use HTTPS instead of http.
 @app.before_request
@@ -29,6 +30,7 @@ def teamSelect():
             creds = pickle.load(token)
     else:
         return redirect(url_for("authPage"))
+    print(creds.valid)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
