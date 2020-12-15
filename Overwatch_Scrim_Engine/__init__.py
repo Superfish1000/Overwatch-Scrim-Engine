@@ -1,9 +1,9 @@
 from flask import Flask
-import hashlib
+import hashlib, os
 
 app = Flask(__name__)
 
-secretKey = b"SuperSecretWow"
+secretKey = os.environ.get('SECRET_KEY', "SuperSecretWow").encode()
 
 hashedKey = hashlib.sha256(secretKey).hexdigest()
 
