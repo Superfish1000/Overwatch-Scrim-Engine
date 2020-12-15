@@ -5,13 +5,13 @@ from wtforms import StringField, IntegerField, DateField, SelectField, RadioFiel
 class SampleForm(FlaskForm):
     first_name = StringField("First Name")
     last_name = StringField("Last Name")
-    panther_id = IntegerField("ID")
-    start_date = DateField("Start Date", format='%m/%d/%Y')
-    major = RadioField("Major", choices=[('it', 'Information Technology'),
-                                         ('cs', 'Computer Science')
+    id = IntegerField("ID")
+    date = DateField("Date", format='%m/%d/%Y')
+    radio = RadioField("Name", choices=[('code1', 'Name1'),
+                                         ('code2', 'Name2')
                                          ])
 
-    campus = SelectField("Campus", choices=[('mmc', "MMC"),
-                                            ('bbc', 'BBC'),
-                                            ('ec', 'Engineering Campus')
+    campus = SelectField("Name/Type", choices=[('code1', "Name1"),
+                                            ('code2', 'Name2'),
+                                            ('code3', 'Name3')
                                             ])
