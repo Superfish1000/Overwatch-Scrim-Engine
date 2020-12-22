@@ -12,7 +12,7 @@ SHEET_RANGE_NAME =  'Form Responses 1!A2:E'
 # To call get players, creds data must be passed in to be used for the GSuite API.
 def getPlayers(creds):
 
-    service = build('sheets', 'v4', credentials=creds)
+    service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
 
     # Load the sheets API.
     sheet = service.spreadsheets()

@@ -46,16 +46,19 @@ def teamSelect():
 
     player_profile_url = "https://playoverwatch.com/en-us/career/pc/"
 
-    players_list = ["Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666"]
+    
     
     # Load player names from spreadsheet, extract player handles and format them to be used in request URLs
     # ############### TODO ###############
     # Add sorting to place players in positionally logical locations based on the role they signed up for.
     # Migrate from a list system to dictonary to allow including of player stat data such as role and SR.
     #
+    raw_player_list = player_handler.getPlayers(creds)
 
-
-    players_list = player_handler.formatAllForWeb(player_handler.extractBattleNet(player_handler.getPlayers(creds)))
+    if not raw_player_list:
+        players_list = ["Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666", "Superfish-11666"]
+    else:
+        players_list = player_handler.formatAllForWeb(player_handler.extractBattleNet(raw_player_list))
 
 
     # my_sample_form = forms.SampleForm(request.form)
